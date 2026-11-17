@@ -5,24 +5,24 @@ const router = express.Router();
 const {
     createStudent,
     getStudents,
-    getStudentById,
+    getStudent,
     updateStudent,
     deleteStudent
 } = require("../controllers/studentController");
 
-// CREATE
+// Create a student
 router.post("/", createStudent);
 
-// READ ALL
+// Get all students
 router.get("/", getStudents);
 
-// READ ONE
-router.get("/:id", getStudentById);
+// Get one student
+router.get("/:id", getStudent);
 
-// UPDATE
+// Update a student
 router.put("/:id", updateStudent);
 
-// DELETE
+// Delete a student
 router.delete("/:id", deleteStudent);
 
 module.exports = router;

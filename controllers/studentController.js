@@ -1,8 +1,8 @@
 
 const Student = require("../models/Student");
 
-// CREATE Student
-exports.createStudent = async (req, res) => {
+// CREATE - Add a student
+const createStudent = async (req, res) => {
     try {
         const student = await Student.create(req.body);
         res.status(201).json(student);
@@ -11,8 +11,8 @@ exports.createStudent = async (req, res) => {
     }
 };
 
-// READ All Students
-exports.getStudents = async (req, res) => {
+// READ - Get all students
+const getStudents = async (req, res) => {
     try {
         const students = await Student.find();
         res.status(200).json(students);
@@ -21,8 +21,8 @@ exports.getStudents = async (req, res) => {
     }
 };
 
-// READ Single Student
-exports.getStudentById = async (req, res) => {
+// READ - Get one student
+const getStudent = async (req, res) => {
     try {
         const student = await Student.findById(req.params.id);
 
@@ -32,12 +32,12 @@ exports.getStudentById = async (req, res) => {
 
         res.status(200).json(student);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };
 
-// UPDATE Student
-exports.updateStudent = async (req, res) => {
+// UPDATE - Update a student
+const updateStudent = async (req, res) => {
     try {
         const student = await Student.findByIdAndUpdate(
             req.params.id,
@@ -55,8 +55,8 @@ exports.updateStudent = async (req, res) => {
     }
 };
 
-// DELETE Student
-exports.deleteStudent = async (req, res) => {
+// DELETE - Delete a student
+const deleteStudent = async (req, res) => {
     try {
         const student = await Student.findByIdAndDelete(req.params.id);
 
@@ -66,6 +66,14 @@ exports.deleteStudent = async (req, res) => {
 
         res.status(200).json({ message: "Student deleted successfully" });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
+};
+
+module.exports = {
+    createStudent,
+    getStudents,
+    getStudent,
+    updateStudent,
+    deleteStudent
 };
